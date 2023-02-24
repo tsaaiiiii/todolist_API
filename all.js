@@ -63,7 +63,7 @@ list.addEventListener("click", function (e) {
 list.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (e.target.getAttribute("type") == "checkbox") {
-      const completed = e.target.getAttribute("data-status");
+      let completed = e.target.getAttribute("data-status");
       if (e.target.checked) {
         console.log("checkbox 被勾選");
         completed = "Finished";
