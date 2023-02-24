@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&display=swap");
+body {
+  font-family: "Kalam", cursive;
+  text-align: center;
+  background-color: $topic_color;
+}
+.todo_list {
+  @include todo_list;
+}
+
+.title {
+  position: relative;
+  h1 {
+    @include title_h1;
+  }
+  p {
+    font-size: 16px;
+
+    font-weight: lighter;
+
+    padding: 30px;
+  }
+  span {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ca101e;
+  }
+}
+
+.newThing {
+  padding: 20px 120px;
+
+  input.todoAdd {
+    @include todoAdd;
+  }
+  input.btn {
+    font-family: $all_font;
+    width: 50px;
+    border: dashed 2px black;
+    background-color: darken($topic_color, 20%);
+    cursor: pointer;
+    &:hover {
+      background-color: darken($topic_color, 35%);
+      transition-duration: 0.6s;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+}
+.allBtn {
+  input {
+    margin: 20px;
+    width: 100px;
+    height: 30px;
+    border: double;
+    border-width: 1px 2px 3px 3px;
+    background-color: #fff;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(#cc3737, 10%);
+      color: #fff;
+      font-weight: bold;
+      transition-duration: 0.3s;
+    }
+  }
+}
+ul {
+  margin-top: 50px;
+  font-size: 20px;
+  margin-left: 100px;
+}
+li {
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  h3 {
+    width: 230px;
+  }
+  p {
+    margin-right: 20px;
+    font-size: 16px;
+  }
+}
+
+input.delete {
+  background-color: $topic_color;
+  border: none;
+  background-color: $topic_color;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: -5px;
+  &:hover {
+    color: #ca101e;
+    font-size: 24px;
+    transition: 0.4s;
+  }
+}

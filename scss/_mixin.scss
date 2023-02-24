@@ -1,0 +1,34 @@
+@mixin title_h1 {
+  position: absolute;
+  font-size: 60px;
+
+  width: 300px;
+  height: 50px;
+  top: -30px;
+  left: 150px;
+  z-index: 100;
+  background-color: #d8d2c6;
+}
+
+@mixin todo_list {
+  margin: 0 auto;
+  width: 600px;
+  min-height: 800px;
+  margin-top: 50px;
+  border: solid 2px black;
+  border-width: 3px 4px 2px 5px;
+  border-radius: 40% 6% 93% 5%/5% 94% 7% 95%;
+  background-color: #d8d2c6;
+}
+
+@mixin todoAdd {
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  border: 0px;
+  border-bottom: dashed 2px black;
+  outline: none;
+  font-family: $all_font;
+  background-color: $topic_color;
+  font-size: 16px;
+}
