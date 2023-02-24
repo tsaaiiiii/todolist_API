@@ -2,8 +2,7 @@
 
 const apiEndpoint = "https://todoo.5xcamp.us/todos";
 const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMjk5Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3MjIxMDk0LCJleHAiOjE2Nzg1MTcwOTQsImp0aSI6IjU4YjMyYmY3LTJhOWEtNDJlOS05OWFhLTY0YjMxOGYzNTE4NSJ9.JFooUTuIBnqPdAHCQnDXz2p5av7pVgdLUZY817P9bqQ";
-
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMzA1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3MjU0NTU4LCJleHAiOjE2Nzg1NTA1NTgsImp0aSI6IjNkZTYyNzM1LTlmMWItNGJmYS04OTQ3LWQwYjJmZmYxYzBlMiJ9.uuI8Yz7v1uJzGC7liQ1TTt1GUEht4cUxrSFrIcjNFNQ";
 const headers = {
   Authorization: `Bearer ${token}`,
   accept: "application/json",
@@ -28,7 +27,7 @@ const list = document.querySelector(".list");
 function init() {
   let str = "";
   data.forEach(function (item, index) {
-    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ data-status="${item.completed_at}" /><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
+    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ data-status="${item.completed_at}" /><input type="button" class="delete" data-num ="${index}" value="✘" "/>data-id = "${item.id}</li>`;
   });
   console.log(str);
   list.innerHTML = str;
@@ -36,11 +35,11 @@ function init() {
 getApi();
 
 //✘ 刪除
+const getId = e.target.getAttribute("data-id");
 list.addEventListener("click", function (e) {
   //點擊到其他地方
   if (e.target.getAttribute("class") == "delete") {
     //抓取data-id 要抓取每一筆id資料
-    const getId = e.target.getAttribute("data-id");
     console.log(getId);
 
     // axios刪除
@@ -67,11 +66,9 @@ list.addEventListener("click", function (e) {
       if (e.target.checked) {
         console.log("checkbox 被勾選");
         completed = "Finished";
-        console.log(completed);
       } else {
         console.log("checkbox 沒有被勾選");
         completed = "null";
-        console.log(completed);
       }
     }
   });
