@@ -40,7 +40,7 @@ list.addEventListener("click", function (e) {
   //點擊到其他地方
   if (e.target.getAttribute("class") == "delete") {
     //抓取data-id 要抓取每一筆id資料
-    let getId = e.target.getAttribute("data-id");
+    const getId = e.target.getAttribute("data-id");
     console.log(getId);
 
     // axios刪除
