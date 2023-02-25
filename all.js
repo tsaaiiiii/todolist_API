@@ -67,11 +67,11 @@ list.addEventListener("click", function (e) {
         console.log("checkbox 被勾選");
         const getId = e.target.getAttribute("data-id");
         const newData = {
-          id: item.id,
+          id: getId,
           completed_at: item.completed_at,
         };
         axios
-          .put(`${apiEndpoint}/${getId}`, data, config)
+          .put(`${apiEndpoint}/${getId}`, newData, config)
           .then(function (response) {
             console.log(response);
           })
