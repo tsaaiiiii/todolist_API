@@ -73,19 +73,21 @@ list.addEventListener("click", function (e) {
     if (e.target.getAttribute("type") == "checkbox") {
       if (e.target.checked) {
         console.log("checkbox 被勾選");
-        const getId = e.target.getAttribute("data-id");
-        const newData = {
-          id: getId,
-          completed_at: "Finished",
-        };
-        axios
-          .put(`${apiEndpoint}/${getId}`, newData, config2)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        // item.completed_at = "Finished";
+        //   const getId = e.target.getAttribute("data-id");
+        //   const newData = {
+        //     id: getId,
+        //     completed_at: "Finished",
+        //   }
+        // ;
+        // axios
+        //   .put(`${apiEndpoint}/${getId}`, newData, config2)
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
       } else {
         console.log("checkbox 沒有被勾選");
       }
@@ -98,7 +100,20 @@ const finished = document.querySelector(".finished");
 finished.addEventListener("click", function (e) {
   let done = "";
   data.forEach(function (item, index) {
-    if (item.completed_at == "Finished") {
+    if (e.target.checked) {
+      const getId = e.target.getAttribute("data-id");
+      const newData = {
+        id: getId,
+        completed_at: "Finished",
+      };
+      axios
+        .put(`${apiEndpoint}/${getId}`, newData, config2)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" /></li>`;
     }
   });
