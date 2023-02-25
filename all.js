@@ -73,26 +73,31 @@ list.addEventListener("click", function (e) {
     if (e.target.getAttribute("type") == "checkbox") {
       if (e.target.checked) {
         console.log("checkbox 被勾選");
-        // item.completed_at = "Finished";
-        //   const getId = e.target.getAttribute("data-id");
-        //   const newData = {
-        //     id: getId,
-        //     completed_at: "Finished",
-        //   }
-        // ;
-        // axios
-        //   .put(`${apiEndpoint}/${getId}`, newData, config2)
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
       } else {
         console.log("checkbox 沒有被勾選");
       }
     }
   });
+});
+const check_btn = document.querySelector(".check");
+check_btn.addEventListener("click", function (e) {
+  if (e.target.checked) {
+    const getId = e.target.getAttribute("data-id");
+    const newData = {
+      id: getId,
+      completed_at: "Finished",
+    };
+    axios
+      .put(`${apiEndpoint}/${getId}`, newData, config2)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
+    console.log("沒有被勾選");
+  }
 });
 //將finish的資訊呈現在網頁上
 
@@ -100,20 +105,7 @@ const finished = document.querySelector(".finished");
 finished.addEventListener("click", function (e) {
   let done = "";
   data.forEach(function (item, index) {
-    if (e.target.checked) {
-      const getId = e.target.getAttribute("data-id");
-      const newData = {
-        id: getId,
-        completed_at: "Finished",
-      };
-      axios
-        .put(`${apiEndpoint}/${getId}`, newData, config2)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    if (item.completed_at == "Finished") {
       done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" /></li>`;
     }
   });
