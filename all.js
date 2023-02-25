@@ -71,7 +71,7 @@ list.addEventListener("click", function (e) {
           completed_at: item.completed_at,
         };
         axios
-          .put(`${apiEndpoint}/${getId}`, newData, config)
+          .put(`${apiEndpoint}/${getId}`, config, newData)
           .then(function (response) {
             console.log(response);
           })
