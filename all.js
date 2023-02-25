@@ -71,34 +71,21 @@ list.addEventListener("click", function (e) {
 list.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (e.target.getAttribute("type") == "checkbox") {
-      if (e.target.checked) {
-        console.log("checkbox 被勾選");
-      } else {
-        console.log("checkbox 沒有被勾選");
+      if (item.id == e.target.getAttribute("data-id")) {
+        if (e.target.checked) {
+          console.log("checkbox 被勾選");
+          item.completed_at = "Finished";
+          // 當checkbox被勾選時，要執行的程式碼
+        } else {
+          console.log("checkbox 沒有被勾選");
+          item.completed_at = "null";
+          // 當checkbox沒有被勾選時，要執行的程式碼
+        }
       }
     }
   });
 });
-const check_btn = document.querySelector(".check");
-check_btn.addEventListener("click", function (e) {
-  if (e.target.checked) {
-    const getId = e.target.getAttribute("data-id");
-    const newData = {
-      id: getId,
-      completed_at: "Finished",
-    };
-    axios
-      .put(`${apiEndpoint}/${getId}`, newData, config2)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  } else {
-    console.log("沒有被勾選");
-  }
-});
+
 //將finish的資訊呈現在網頁上
 
 const finished = document.querySelector(".finished");
@@ -106,11 +93,25 @@ finished.addEventListener("click", function (e) {
   let done = "";
   data.forEach(function (item, index) {
     if (item.completed_at == "Finished") {
-      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" /></li>`;
+      const getId = e.target.getAttribute("data-id");
+      const newData = {
+        id: getId,
+        completed_at: item.completed_at,
+      };
+
+      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}/></li>`;
     }
   });
   list.innerHTML = done;
 });
+axios
+  .put(`${apiEndpoint}/${getId}`, newData, config2)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 //all
 const all = document.querySelector(".all");
 
