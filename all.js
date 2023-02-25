@@ -70,28 +70,26 @@ list.addEventListener("click", function (e) {
 list.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (e.target.getAttribute("type") == "checkbox") {
-      if (item.id == e.target.getAttribute("data-id")) {
-        if (e.target.checked) {
-          console.log("checkbox 被勾選");
-          const getId = e.target.getAttribute("data-id");
-          const newData = {
-            id: getId,
-            completed_at: "Finished",
-          };
-          axios
-            .put(`${apiEndpoint}/${getId}`, newData, config2)
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-          // 當checkbox被勾選時，要執行的程式碼
-        } else {
-          console.log("checkbox 沒有被勾選");
-          item.completed_at = "null";
-          // 當checkbox沒有被勾選時，要執行的程式碼
-        }
+      if (e.target.checked) {
+        console.log("checkbox 被勾選");
+        const getId = e.target.getAttribute("data-id");
+        const newData = {
+          id: getId,
+          completed_at: "Finished",
+        };
+        axios
+          .put(`${apiEndpoint}/${getId}`, newData, config2)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        // 當checkbox被勾選時，要執行的程式碼
+      } else {
+        console.log("checkbox 沒有被勾選");
+        item.completed_at = "null";
+        // 當checkbox沒有被勾選時，要執行的程式碼
       }
     }
   });
