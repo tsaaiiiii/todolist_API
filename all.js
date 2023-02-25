@@ -8,9 +8,17 @@ const headers = {
   Authorization: `Bearer ${token}`,
   accept: "application/json",
 };
+
 const config = {
   headers: {
     Authorization: `Bearer ${token}`,
+  },
+};
+const config2 = {
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   },
 };
 let data = [];
@@ -68,10 +76,10 @@ list.addEventListener("click", function (e) {
         const getId = e.target.getAttribute("data-id");
         const newData = {
           id: getId,
-          completed_at: item.completed_at,
+          completed_at: "Finished",
         };
         axios
-          .put(`${apiEndpoint}/${getId}`, config, newData)
+          .put(`${apiEndpoint}/${getId}`, newData, config2)
           .then(function (response) {
             console.log(response);
           })
