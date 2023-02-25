@@ -28,7 +28,7 @@ const list = document.querySelector(".list");
 function init() {
   let str = "";
   data.forEach(function (item, index) {
-    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ data-status="${item.completed_at}" /><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
+    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ " /><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
   });
   console.log(str);
   list.innerHTML = str;
@@ -63,15 +63,23 @@ list.addEventListener("click", function (e) {
 list.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (e.target.getAttribute("type") == "checkbox") {
-      let completed = e.target.getAttribute("data-status");
       if (e.target.checked) {
         console.log("checkbox 被勾選");
-        completed = "Finished";
-        console.log(completed);
+        const getId = e.target.getAttribute("data-id");
+        const newData = {
+          id: item.id,
+          completed_at: item.completed_at,
+        };
+        axios
+          .put(`${apiEndpoint}/${getId}`, data, config)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       } else {
         console.log("checkbox 沒有被勾選");
-        completed = "null";
-        console.log(completed);
       }
     }
   });
