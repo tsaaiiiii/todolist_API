@@ -90,29 +90,28 @@ list.addEventListener("click", function (e) {
 
 const finished = document.querySelector(".finished");
 finished.addEventListener("click", function (e) {
+  const getId = e.target.getAttribute("data-id");
   let done = "";
   data.forEach(function (item, index) {
     if (item.completed_at == "Finished") {
-      const getId = e.target.getAttribute("data-id");
+      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
       const newData = {
         id: getId,
         completed_at: item.completed_at,
       };
-
-      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}/></li>`;
+      axios
+        .put(`${apiEndpoint}/${getId}`, newData, config2)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   });
   list.innerHTML = done;
 });
-const getId = e.target.getAttribute("data-id");
-axios
-  .put(`${apiEndpoint}/${getId}`, newData, config2)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+
 //all
 const all = document.querySelector(".all");
 
