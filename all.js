@@ -2,8 +2,7 @@
 
 const apiEndpoint = "https://todoo.5xcamp.us/todos";
 const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMzA1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3MjU0NTM1LCJleHAiOjE2Nzg1NTA1MzUsImp0aSI6ImU1ZDE0MmY2LWNjODUtNDgyYS1iYWMzLWU5Y2M3ZDkzMmMwMyJ9.s3E0cba2LxLg0CYKRB5sLC5oxcucKDiEu69U1rPU_wE";
-
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMzE3Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3MzQxMDg1LCJleHAiOjE2Nzg2MzcwODUsImp0aSI6IjM4MGJlZGJhLWQxOTYtNDUxOS1iM2ExLWU1YzQ5ODkzYmUzYSJ9.tRX93Jo7kAQH4Qvv_XTz1i_FmYr1COuKfv5zv1_ZvT4";
 const headers = {
   Authorization: `Bearer ${token}`,
   accept: "application/json",
@@ -74,7 +73,19 @@ list.addEventListener("click", function (e) {
       if (item.id == e.target.getAttribute("data-id")) {
         if (e.target.checked) {
           console.log("checkbox 被勾選");
-          item.completed_at = "Finished";
+          const getId = e.target.getAttribute("data-id");
+          const newData = {
+            id: getId,
+            completed_at: "Finished",
+          };
+          axios
+            .put(`${apiEndpoint}/${getId}`, newData, config2)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
           // 當checkbox被勾選時，要執行的程式碼
         } else {
           console.log("checkbox 沒有被勾選");
@@ -95,18 +106,6 @@ finished.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (item.completed_at == "Finished") {
       done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
-      const newData = {
-        id: getId,
-        completed_at: item.completed_at,
-      };
-      axios
-        .put(`${apiEndpoint}/${getId}`, newData, config2)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     }
   });
   list.innerHTML = done;
