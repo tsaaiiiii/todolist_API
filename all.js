@@ -104,6 +104,7 @@ finished.addEventListener("click", function (e) {
   });
   list.innerHTML = done;
 });
+const getId = e.target.getAttribute("data-id");
 axios
   .put(`${apiEndpoint}/${getId}`, newData, config2)
   .then(function (response) {
