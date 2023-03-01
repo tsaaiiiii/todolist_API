@@ -70,12 +70,12 @@ list.addEventListener("click", function (e) {
 list.addEventListener("click", function (e) {
   data.forEach(function (item, index) {
     if (e.target.getAttribute("type") == "checkbox") {
-      console.log("data-id");
       if (e.target.checked) {
         console.log("checkbox 被勾選");
         let status = e.target.getAttribute("data-status");
         status = "Finished";
         console.log(status);
+        console.log(data);
         // const getId = e.target.getAttribute("data-id");
         // const newData = {
         //   id: getId,
