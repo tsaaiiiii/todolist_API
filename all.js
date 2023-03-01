@@ -35,7 +35,7 @@ const list = document.querySelector(".list");
 function init() {
   let str = "";
   data.forEach(function (item, index) {
-    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ " /><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
+    str += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔ " /><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/>data-status = "${item.completed_at}"</li>`;
   });
   console.log(str);
   list.innerHTML = str;
@@ -72,23 +72,26 @@ list.addEventListener("click", function (e) {
     if (e.target.getAttribute("type") == "checkbox") {
       if (e.target.checked) {
         console.log("checkbox 被勾選");
-        const getId = e.target.getAttribute("data-id");
-        const newData = {
-          id: getId,
-          completed_at: "Finished",
-        };
-        axios
-          .put(`${apiEndpoint}/${getId}`, newData, config2)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        const status = e.target.getAttribute("data-status");
+        status = "Finished";
+        // const getId = e.target.getAttribute("data-id");
+        // const newData = {
+        //   id: getId,
+        //   completed_at: "Finished",
+        // };
+        // axios
+        //   .put(`${apiEndpoint}/${getId}`, newData, config2)
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
         // 當checkbox被勾選時，要執行的程式碼
       } else {
         console.log("checkbox 沒有被勾選");
-        item.completed_at = "null";
+        const status = e.target.getAttribute("data-status");
+        status = "null";
         // 當checkbox沒有被勾選時，要執行的程式碼
       }
     }
@@ -103,7 +106,7 @@ finished.addEventListener("click", function (e) {
   let done = "";
   data.forEach(function (item, index) {
     if (item.completed_at == "Finished") {
-      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/></li>`;
+      done += `<li><p>●</p><h3>${item.content}</h3><input type="button" class="delete" data-num ="${index}" value="✘" data-id = "${item.id}"/>data-status = "${item.completed_at}"</li>`;
     }
   });
   list.innerHTML = done;
@@ -115,7 +118,7 @@ const all = document.querySelector(".all");
 all.addEventListener("click", function (e) {
   let allStr = "";
   data.forEach(function (item, index) {
-    allStr += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔"/><input type="button" class="delete" data-num ="${index}" value="✘" /></li>`;
+    allStr += `<li><p>●</p><h3>${item.content}</h3><input type="checkbox" class="check"data-number="${index}" value="✔"/><input type="button" class="delete" data-num ="${index}" value="✘" />data-status = "${item.completed_at}"</li>`;
   });
   list.innerHTML = allStr;
 });
