@@ -72,8 +72,9 @@ list.addEventListener("click", function (e) {
     if (e.target.getAttribute("type") == "checkbox") {
       if (e.target.checked) {
         console.log("checkbox 被勾選");
-        e.target.getAttribute("data-status") = "Finished";
-        
+        let status = e.target.getAttribute("data-status");
+        status += "Finished";
+        console.log(status);
         // const getId = e.target.getAttribute("data-id");
         // const newData = {
         //   id: getId,
@@ -90,8 +91,8 @@ list.addEventListener("click", function (e) {
         // 當checkbox被勾選時，要執行的程式碼
       } else {
         console.log("checkbox 沒有被勾選");
-         e.target.getAttribute("data-status") = "null";
-        
+        let status = e.target.getAttribute("data-status");
+        console.log(status);
         // 當checkbox沒有被勾選時，要執行的程式碼
       }
     }
