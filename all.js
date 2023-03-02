@@ -2,7 +2,7 @@
 
 const apiEndpoint = "https://todoo.5xcamp.us/todos";
 const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMzUwIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3NjM0ODcyLCJleHAiOjE2Nzg5MzA4NzIsImp0aSI6IjhiZGUxMzc0LTI2NzQtNDRjNi1hMDE1LWM5NTU3MDM2ODNjMiJ9.Rnvxsu6szsE8X3qnTKBEzMWZI1KmfnEz43_rtlnfxyQ";
+  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMzY5Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjc3NzM4MDY0LCJleHAiOjE2NzkwMzQwNjQsImp0aSI6ImRmN2EzMDRlLTA2YTgtNDFiNC05ZjYxLTEwODdmZTEyMzBhOCJ9.uSwRl3KSJqw6f_EGI4ygF4dhhyLuhKALTuxrq-OWu4M";
 const headers = {
   Authorization: `Bearer ${token}`,
   accept: "application/json",
